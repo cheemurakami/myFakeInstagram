@@ -1,8 +1,18 @@
+body{
+    font-family:"Yu Gothic", "游ゴシック", YuGothic, "游ゴシック体";
+    max-width: 600px;
+}
 .img{
-    width:200px;
-    height: 200px;
+    width:100%;
 }
 .far.fa-hand-spock.like-icon{
     display: block;
     cursor: pointer;
+}
+.post-div{
+    margin: 8px 8px;
+    padding: 8px 8px;
+}
+.posted-at-date{
+    border-bottom: 2px solid #d2e0e0;
 }

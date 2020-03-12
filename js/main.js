@@ -65,16 +65,18 @@ let postsArray = [
   
   
   for (i=0; i<postsArray.length; i++){
+    const post = postsArray[i];
     const postDiv = document.createElement('div');
-    divParent.appendChild(postDiv);
-      
+    postDiv.classList.add('post-div');
+    divParent.appendChild(postDiv);  
+
     let accNameElement = document.createElement('div');
-    accNameElement.textContent = postsArray[i].accountName;
+    accNameElement.textContent = post.accountName;
     postDiv.appendChild(accNameElement);
       
     let imgElement = document.createElement('img');
     imgElement.classList.add('img');
-    imgElement.src = postsArray[i].imgUrl;
+    imgElement.src = post.imgUrl;
     postDiv.appendChild(imgElement);
 
     let iconElement = document.createElement('i');
@@ -82,47 +84,37 @@ let postsArray = [
     postDiv.appendChild(iconElement);
 
     let likesCount = document.createElement('span');
-    likesCount.textContent = `${postsArray[i].likes}likes`;
+    likesCount.textContent = `${post.likes}likes`;
     postDiv.appendChild(likesCount);
 
     let captionElement = document.createElement('div');
-    captionElement.textContent = postsArray[i].caption;
+    captionElement.textContent = post.caption;
     postDiv.appendChild(captionElement);
 
     let tagElement = document.createElement('div');
-    // tagElement.textContent = postsArray[i].tags; これだと#なしで出るからそれの付け方↓mapを使う
-    const tagsWithSymbolArray = postsArray[i].tags.map(x => '#' + x); // 新しく作った配列で最初x=current valueでなんでも入る
+    // tagElement.textContent = post.tags; これだと#なしで出るからそれの付け方↓mapを使う
+    const tagsWithSymbolArray = post.tags.map(x => '#' + x); // 新しく作った配列で最初x=current valueでなんでも入る
     tagElement.textContent = tagsWithSymbolArray; 
     postDiv.appendChild(tagElement);
 
     let postedAtDate = document.createElement('div');
-    let ddmmyyyy =  new Date(postsArray[i].postedAt);
+    postedAtDate.classList.add('posted-at-date');
+    let ddmmyyyy =  new Date(post.postedAt);
     const month = String(ddmmyyyy.getMonth()+1);
     const day = String(ddmmyyyy.getDate());
     const year = String(ddmmyyyy.getFullYear());
+
     postedAtDate.textContent = `Posted at : ${month}/${day}/${year}`;
-    // postedAtDate.textContent =new Date(postsArray[i].postedAt);
+    // postedAtDate.textContent =new Date(post.postedAt);
     postDiv.appendChild(postedAtDate);
 
 
 
 
-    for(j=0; j<postsArray[i].comments.length; j++){
+    for(j=0; j<post.comments.length; j++){
         let commentsElement = document.createElement('div');
-        commentsElement.textContent = `${postsArray[i].comments[j].accountName}: ${postsArray[i].comments[j].text}`;
+        commentsElement.textContent = `${post.comments[j].accountName}: ${post.comments[j].text}`;
         postDiv.appendChild(commentsElement);
-    }
-
-
-    // comments: [
-    //     {
-    //       accountName: "hab",
-    //       text: "4head"
-    //     },
-    //     {
-    //       accountName: "healing",
-    //       text: "可愛い"
-    //     }
-
+    };
 
   };
