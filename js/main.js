@@ -1,4 +1,4 @@
-
+   
 let postsArray = [
     {
       imgUrl: "https://scontent-sea1-1.cdninstagram.com/v/t51.2885-15/e35/s1080x1080/87387900_200798944475354_3854568312053172106_n.jpg?_nc_ht=scontent-sea1-1.cdninstagram.com&_nc_cat=102&_nc_ohc=2l5OqJSyFoUAX94umfi&oh=f001ad1a1b421c212b598c35316f9672&oe=5E90E241",
@@ -6,7 +6,7 @@ let postsArray = [
       tags: ["twitterweek", "catsofinstagram"],
       likes: 120137,
       accountName: "cats_of_instagram",
-      postedAt: 1581033600,
+      postedAt: 1583903365292,
       comments: [
         {
           accountName: "amer_neko",
@@ -24,7 +24,7 @@ let postsArray = [
       tags: ["twitterweek", "catsofinstagram"],
       likes: 10447,
       accountName: "cats_of_instagram",
-      postedAt: 1581043600,
+      postedAt: 1583111113292,
       comments: [
         {
           accountName: "kitty_bangu_bangu",
@@ -42,7 +42,7 @@ let postsArray = [
       tags: ["twitterweek", "catsofinstagram"],
       likes: 19990,
       accountName: "cats_of_instagram",
-      postedAt: 1581053100,
+      postedAt: 1583411113292,
       comments: [
         {
           accountName: "hab",
@@ -56,9 +56,8 @@ let postsArray = [
     }
   ];
 
-
   const divParent = document.getElementById('main-container');
-
+  
   
   // let imgElement = document.createElement('img'); まずimg element作る
   // imgElement.src = "https://scontent-sea1-1.cdninstagram.com/v/t51.2885-15/e35/s1080x1080/87387900_200798944475354_3854568312053172106_n.jpg?_nc_ht=scontent-sea1-1.cdninstagram.com&_nc_cat=102&_nc_ohc=2l5OqJSyFoUAX94umfi&oh=f001ad1a1b421c212b598c35316f9672&oe=5E90E241",
@@ -68,7 +67,11 @@ let postsArray = [
   for (i=0; i<postsArray.length; i++){
     const postDiv = document.createElement('div');
     divParent.appendChild(postDiv);
-
+      
+    let accNameElement = document.createElement('div');
+    accNameElement.textContent = postsArray[i].accountName;
+    postDiv.appendChild(accNameElement);
+      
     let imgElement = document.createElement('img');
     imgElement.classList.add('img');
     imgElement.src = postsArray[i].imgUrl;
@@ -78,14 +81,48 @@ let postsArray = [
     iconElement.classList.add('far','fa-hand-spock','like-icon');
     postDiv.appendChild(iconElement);
 
+    let likesCount = document.createElement('span');
+    likesCount.textContent = `${postsArray[i].likes}likes`;
+    postDiv.appendChild(likesCount);
+
     let captionElement = document.createElement('div');
     captionElement.textContent = postsArray[i].caption;
     postDiv.appendChild(captionElement);
 
     let tagElement = document.createElement('div');
-    // tagElement.textContent = postsArray[i].tags;
+    // tagElement.textContent = postsArray[i].tags; これだと#なしで出るからそれの付け方↓mapを使う
     const tagsWithSymbolArray = postsArray[i].tags.map(x => '#' + x); // 新しく作った配列で最初x=current valueでなんでも入る
     tagElement.textContent = tagsWithSymbolArray; 
     postDiv.appendChild(tagElement);
 
-}
+    let postedAtDate = document.createElement('div');
+    let ddmmyyyy =  new Date(postsArray[i].postedAt);
+    const month = String(ddmmyyyy.getMonth()+1);
+    const day = String(ddmmyyyy.getDate());
+    const year = String(ddmmyyyy.getFullYear());
+    postedAtDate.textContent = `Posted at : ${month}/${day}/${year}`;
+    // postedAtDate.textContent =new Date(postsArray[i].postedAt);
+    postDiv.appendChild(postedAtDate);
+
+
+
+
+    for(j=0; j<postsArray[i].comments.length; j++){
+        let commentsElement = document.createElement('div');
+        commentsElement.textContent = `${postsArray[i].comments[j].accountName}: ${postsArray[i].comments[j].text}`;
+        postDiv.appendChild(commentsElement);
+    }
+
+
+    // comments: [
+    //     {
+    //       accountName: "hab",
+    //       text: "4head"
+    //     },
+    //     {
+    //       accountName: "healing",
+    //       text: "可愛い"
+    //     }
+
+
+  };

@@ -4,4 +4,5 @@
 }
 .far.fa-hand-spock.like-icon{
     display: block;
+    cursor: pointer;
 }
